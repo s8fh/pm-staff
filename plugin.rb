@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # name: allow-pms-to-staff
 # about: Allow pms to staff even if PMs are otherwise not allowed
 # version: 0.1
@@ -8,7 +10,7 @@ after_initialize do
     is_user = target.is_a?(User)
     is_group = target.is_a?(Group)
 
-    (is_group || is_user || target.id < 0 ) &&
+    (is_group || is_user || target.id < 0) &&
     # User is authenticated
     authenticated? &&
     # Have to be a basic level at least -- and now: OR SENDING TO ADMIN
