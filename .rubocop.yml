@@ -1,0 +1,8 @@
+inherit_from: https://raw.githubusercontent.com/discourse/discourse/master/.rubocop.yml
+
+Style/GlobalVars:
+  AllowedVariables: [
+    $prometheus_client,
+    $parent_pid,
+    $port
+  ]
