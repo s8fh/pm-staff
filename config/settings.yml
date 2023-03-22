@@ -1,0 +1,7 @@
+plugins:
+  allow_pm_to_staff_enabled:
+    default: true
+    client: true
+  allow_pm_allowed_pm_groups:
+    default: staff
+    client: true
