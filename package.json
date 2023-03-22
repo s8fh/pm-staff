@@ -1,0 +1,14 @@
+{
+  "name": "discourse-plugin-name",
+  "version": "0.0.1",
+  "repository": "TODO",
+  "author": "Discourse",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-discourse": "^3.1.0",
+    "eslint-plugin-react": "^7.32.2"
+  },
+  "dependencies": {
+    "eslint": "^8.36.0"
+  }
+}
