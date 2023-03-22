@@ -13,7 +13,7 @@ describe TopicCreator do
   let(:pm_valid_attrs)  { { raw: 'this is a new post', title: 'this is a new title', archetype: Archetype.private_message, target_usernames: moderator.username } }
   let(:pm_to_normal_user)  { { raw: 'this is another new post', title: 'this is still a new title', archetype: Archetype.private_message, target_usernames:  user2.username} }
 
-  context 'personal message' do
+  context 'when sending a personal message' do
     it "should be possible for a trusted user to send private message" do
       puts "setting the settings"
       SiteSetting.min_trust_to_send_messages = TrustLevel[2]
