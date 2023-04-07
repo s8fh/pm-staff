@@ -43,9 +43,16 @@ after_initialize do
     # even if they are not in personal_message_enabled_groups
     group_is_messageable = target_is_group && Group.messageable(@user).where(id: target.id).exists?
 
-    receiving_group = target_is_group ? false :
-      (target.groups.pluck(:name) & SiteSetting.allow_pm_allowed_pm_groups.split("|")).length > 0
-      
+    receiving_group =
+      (
+        if target_is_group
+          false
+        else
+          (target.groups.pluck(:name) & SiteSetting.allow_pm_allowed_pm_groups.split("|")).length >
+            0
+        end
+      )
+
     # User is authenticated and can send PMs, this can be covered by trust levels as well via AUTO_GROUPS
     (can_send_private_messages?(notify_moderators: notify_moderators) || group_is_messageable) &&
       # User disabled private message
