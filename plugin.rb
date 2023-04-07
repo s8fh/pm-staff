@@ -30,19 +30,6 @@ after_initialize do
       # Silenced users can only send PM to staff
       (!is_silenced? || target.staff?)
   end
-  add_to_class(:guardian, :can_send_private_messages?) do |notify_moderators: false|
-    from_system = @user.is_system_user?
-    from_bot = @user.bot?
-
-    # User is authenticated
-    authenticated? &&
-      # User can send PMs, this can be covered by trust levels as well via AUTO_GROUPS
-      (
-        is_staff? || from_bot || from_system ||
-          (@user.in_any_groups?(SiteSetting.personal_message_enabled_groups_map)) ||
-          notify_moderators || SiteSetting.allow_pm_to_staff_enabled
-      )
-  end
 
   add_to_class(:guardian, :can_send_private_message?) do |target, notify_moderators: false|
     target_is_user = target.is_a?(User)
@@ -56,8 +43,9 @@ after_initialize do
     # even if they are not in personal_message_enabled_groups
     group_is_messageable = target_is_group && Group.messageable(@user).where(id: target.id).exists?
 
-    receiving_group =
+    receiving_group = target_is_group ? false :
       (target.groups.pluck(:name) & SiteSetting.allow_pm_allowed_pm_groups.split("|")).length > 0
+      
     # User is authenticated and can send PMs, this can be covered by trust levels as well via AUTO_GROUPS
     (can_send_private_messages?(notify_moderators: notify_moderators) || group_is_messageable) &&
       # User disabled private message

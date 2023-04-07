@@ -58,5 +58,10 @@ describe TopicCreator do
         TopicCreator.create(user0, Guardian.new(normal_user), pm_to_normal_user)
       end.to raise_error(ActiveRecord::Rollback)
     end
+
+    it "can read a group page" do
+      get "/g/admins"
+      expect(response.status).to eq(200)
+    end
   end
 end
