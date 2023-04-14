@@ -45,6 +45,7 @@ after_initialize do
   end
 
   add_to_class(:guardian, :can_send_private_message?) do |target, notify_moderators: false|
+    return false unless authenticated?
     target_is_user = target.is_a?(User)
     target_is_group = target.is_a?(Group)
     from_system = @user.is_system_user?
