@@ -41,20 +41,17 @@ describe TopicCreator do
     it "should be possible for a trusted user to send private message" do
       SiteSetting.personal_message_enabled_groups = group.id
       GroupUser.create(user: user2, group: group)
-      SiteSetting.enable_personal_messages = true
       expect(TopicCreator.create(user2, Guardian.new(user2), pm_to_normal_user)).to be_valid
     end
 
     it "should be possible for a new user to send private message to admin" do
       SiteSetting.personal_message_enabled_groups = Group::AUTO_GROUPS[:staff]
-      SiteSetting.enable_personal_messages = true
       expect(TopicCreator.create(user0, Guardian.new(user0), pm_valid_attrs_to_admin)).to be_valid
     end
 
     it "should not be possible for a new user to send private message to normal user" do
       staff = Group.find_by(name: "staff")
       SiteSetting.min_trust_to_send_messages = staff.id
-      SiteSetting.enable_personal_messages = true
       expect do
         TopicCreator.create(user0, Guardian.new(normal_user), pm_to_normal_user)
       end.to raise_error(ActiveRecord::Rollback)
