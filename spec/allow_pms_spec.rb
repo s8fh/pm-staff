@@ -51,7 +51,7 @@ describe TopicCreator do
 
     it "should not be possible for a new user to send private message to normal user" do
       staff = Group.find_by(name: "staff")
-      SiteSetting.min_trust_to_send_messages = staff.id
+      SiteSetting.personal_message_enabled_groups = group.id
       expect do
         TopicCreator.create(user0, Guardian.new(normal_user), pm_to_normal_user)
       end.to raise_error(ActiveRecord::Rollback)
