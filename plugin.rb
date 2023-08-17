@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# name: allow-pms-to-staff
+# name: discourse-allow-pm-to-staff
 # about: Allow pms to staff even if PMs are otherwise not allowed
 # version: 0.1
 # authors: pfaffman
