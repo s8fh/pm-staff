@@ -50,7 +50,7 @@ describe TopicCreator do
     end
 
     it "should not be possible for a new user to send private message to normal user" do
-      staff = Group.find_by(name: "staff")
+      # staff = Group.find_by(name: "staff")
       SiteSetting.personal_message_enabled_groups = group.id
       expect do
         TopicCreator.create(user0, Guardian.new(normal_user), pm_to_normal_user)
