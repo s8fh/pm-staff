@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # name: discourse-allow-pm-to-staff
 # about: Allow pms to staff even if PMs are otherwise not allowed
 # version: 0.1
