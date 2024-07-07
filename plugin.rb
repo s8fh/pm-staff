@@ -1,8 +1,8 @@
 # frozen_string_literal: true
-# name: discourse-allow-pm-to-staff
-# about: Allow pms to staff even if PMs are otherwise not allowed
-# version: 0.1
-# authors: pfaffman
+# name: pm-staff
+# about: Allows for users to contact staff members at any point
+# version: 1.0.0
+# authors: Discourse
 
 after_initialize do
   add_to_class(:guardian, :old_can_send_private_message?) do |target, notify_moderators: false|
